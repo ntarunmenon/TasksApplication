@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Task} from "app/tasks/task.model";
+import {Task} from "../task.model";
+import {TaskService} from "../task.service"
 
 
 @Component({
@@ -14,10 +15,14 @@ export class TasksListComponent implements OnInit {
   constructor(private taskService:TaskService) { }
 
   ngOnInit() {
-    return this.taskService.getTasks().subscribe(
+     this.taskService.getTasks().subscribe(
       (tasks : any[]) => {
         this.tasks = tasks
       },(error) => console.log(error)
+      );
+
+      this.taskService.onTaskAdded.subscribe(
+        (task: Task) => this.tasks.push(task)
       );
   }
 
@@ -26,7 +31,7 @@ export class TasksListComponent implements OnInit {
   }
 
   onTaskChange(event,task){
-   // this.taskService.saveTask(task,event.target.checked).subscribe();
+   this.taskService.saveTask(task,event.target.checked).subscribe();
    console.log("task has changed");
   }
 

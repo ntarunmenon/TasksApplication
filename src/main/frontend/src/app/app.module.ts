@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TasksComponent } from './tasks/tasks.component';
@@ -17,7 +18,7 @@ import { TaskService } from './tasks/task.service';
     TasksListComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,HttpModule,FormsModule
   ],
   providers: [TaskService],
   bootstrap: [AppComponent]
